@@ -59,11 +59,12 @@ async function setSystemRun() {
     //if(!cfg.mongodb.done && cfg.mongodb.need){
         //await installMongodb()
     //}
-    let fd=fs.openSync('hehe.txt','wx')
-    if(!fd){
+    try{
+        let fd=fs.openSync('/etc/rc.local','wx')
+        fd.closeSync()
         fs.writeFileSync('/etc/rc.local',`#!/bin/sh -e
 #
-# rc.local
+# rc.local  
 #
 # This script is executed at the end of each multiuser runlevel.
 # Make sure that the script will "exit 0" on success or any other
@@ -77,5 +78,7 @@ async function setSystemRun() {
 # bash /root/bindip.sh
 
 exit 0`)
+    }catch (e) {
+        console.error(e)
     }
 })()
