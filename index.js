@@ -15,7 +15,7 @@ async function optimizeTcp(){
         await shell.execPromsify('sed',['-i',`$a\\net.ipv4.tcp_retries2=${cfg.tcp.options.retries2}`,'/etc/sysctl.conf'])
         await shell.execPromsify('sysctl',['-p'])
     }catch (e) {
-        console.error(e)
+        console.error(e.toString())
         process.exit(1)
     }
     cfg.tcp.done=true
@@ -32,7 +32,7 @@ async function changeFileOpenLimit(){
         await shell.execPromsify('sed',['-i',`$a\\session required pam_limits.so`,'/etc/pam.d/common-session'])
         await shell.execPromsify('sysctl',['-p'])
     }catch (e) {
-        console.error(e)
+        console.error(e.toString())
         process.exit(2)
     }
     cfg.fileOpenLimit.done=true
@@ -63,7 +63,7 @@ async function installMongodb(){
         await shell.execPromsify('sed',['-i','s/#security:/security:/g','/etc/mongod.conf'])
         await shell.execPromsify('sed',['-i','/security:/ a\\  authorization: enabled','/etc/mongod.conf'])
     }catch (e) {
-        console.error(e)
+        console.error(e.toString())
         process.exit(3)
     }
     cfg.mongodb.done=true
@@ -122,10 +122,10 @@ exit 0`)
     try
     {
         await shell.execPromsify('chmod',['+x','/etc/rc.local'],{cwd:__dirname})
-        await shell.execPromsify('systemctl',['enable','rc-local'],{cwd:__dirname})
+        await shell.execPromsify('systemctl',['enable','rc-local'],{cwd:__dirname},true)
         //await shell.execPromsify('systemctl',['start','rc-local.service'],{cwd:__dirname})
     }catch (e) {
-        console.error(e)
+        console.error(e.toString())
         process.exit(4)
     }
     cfg.systemRun.done=true

@@ -13,7 +13,7 @@ function exec(cmd,args,options){
         console.error(err.toString())
     })
     cp.on('close', (code) => {
-        console.log(`子进程退出，退出码 ${code}`)
+        console.log(`child process exit ${code}`)
     })
     return cp
 }
@@ -41,7 +41,7 @@ function execPromsify(cmd,args,options,ignoreErr=false){
             }
         })
         cp.on('close', (code) => {
-            console.log(`子进程退出，退出码 ${code}`)
+            console.log(`child process exit ${code}`)
             resolve(cp)
         })
     })
@@ -66,7 +66,7 @@ function execBackgrand(cmd,args,options){
         console.error(err.toString())
     })
     cp.on('close', (code) => {
-        console.log(`子进程退出，退出码 ${code}`)
+        console.log(`child process exit ${code}`)
     })
 }
 
