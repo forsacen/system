@@ -9,8 +9,8 @@ function exec(cmd,args,options){
     cp.stdout.on('data', (data) => {
         console.log(data.toString())
     })
-    cp.stderr.on('error', (err) => {
-        console.error(err)
+    cp.stderr.on('data', (err) => {
+        console.error(err.toString())
     })
     cp.on('close', (code) => {
         console.log(`子进程退出，退出码 ${code}`)
@@ -34,8 +34,8 @@ function execPromsify(cmd,args,options,ignoreErr=false){
         cp.stdout.on('data', (data) => {
             console.log(data.toString())
         })
-        cp.stderr.on('error', (err) => {
-            console.error(err)
+        cp.stderr.on('data', (err) => {
+            console.error(err.toString())
             if(!ignoreErr){
                 reject(err)
             }
@@ -62,8 +62,8 @@ function execBackgrand(cmd,args,options){
     cp.stdout.on('data', (data) => {
         console.log(data.toString())
     })
-    cp.stderr.on('error', (err) => {
-        console.error(err)
+    cp.stderr.on('data', (err) => {
+        console.error(err.toString())
     })
     cp.on('close', (code) => {
         console.log(`子进程退出，退出码 ${code}`)

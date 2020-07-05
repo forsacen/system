@@ -41,7 +41,7 @@ async function changeFileOpenLimit(){
 
 async function installMongodb(){
     try {
-        await shell.execPromsify('wget',['-O','mongodb.deb',cfg.mongodb.options.url],{cwd:__dirname})
+        await shell.execPromsify('wget',['-O','mongodb.deb',cfg.mongodb.options.url],{cwd:__dirname},true)
         await shell.execPromsify('dpkg',['-i','mongodb.deb'],{cwd:__dirname})
         await shell.execPromsify('rm',['mongodb.deb'],{cwd:__dirname})
         await shell.execPromsify('sed',['-i',`s/bindIp: 127.0.0.1/bindIp: ${cfg.mongodb.options.bindIp}/g`,'/etc/mongod.conf'])
