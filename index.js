@@ -146,4 +146,10 @@ exit 0`)
         await systemRun()
     }
     console.log('\n\ncompleted')
+    if(cfg.reboot){
+        await new Promise(function (resolve) {
+            setTimeout(resolve,5000)
+        })
+        shell.execBackgrand('reboot',[],{cwd:__dirname})
+    }
 })()

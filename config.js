@@ -35,5 +35,6 @@ module.exports={
 		"command": [
 			"nohup mongod --config /etc/mongod.conf &"
 		]
-	}
+	},
+	"reboot":true,
 }
