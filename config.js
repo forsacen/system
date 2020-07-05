@@ -36,5 +36,6 @@ module.exports={
     systemRun:{
         done:false,
         need:false,
+        command:['nohup mongod --config "/etc/mongod.conf" &'],
     }
 }

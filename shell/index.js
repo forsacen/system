@@ -36,7 +36,7 @@ function execPromsify(cmd,args,options,ignoreErr=false){
         })
         cp.stderr.on('data', (data) => {
             console.error(data.toString())
-            if(ignoreErr){
+            if(!ignoreErr){
                 reject(data)
             }
         })
