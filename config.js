@@ -18,7 +18,7 @@ module.exports={
 	},
 	"mongodb": {
 		"done": false,
-		"need": true,
+		"need": false,
 		"options": {
 			"url": "https://repo.mongodb.org/apt/debian/dists/stretch/mongodb-org/4.2/main/binary-amd64/mongodb-org-server_4.2.8_amd64.deb",
 			"bindIp": "0.0.0.0",
@@ -31,10 +31,10 @@ module.exports={
 	},
 	"systemRun": {
 		"done": false,
-		"need": true,
+		"need": false,
 		"command": [
 			"nohup mongod --config /etc/mongod.conf &"
 		]
 	},
-	"reboot":true,
+	"reboot":false,
 }

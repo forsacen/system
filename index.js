@@ -123,7 +123,7 @@ exit 0`)
     {
         await shell.execPromsify('chmod',['+x','/etc/rc.local'],{cwd:__dirname})
         await shell.execPromsify('systemctl',['enable','rc-local'],{cwd:__dirname})
-        await shell.execPromsify('systemctl',['start','rc-local.service'],{cwd:__dirname})
+        //await shell.execPromsify('systemctl',['start','rc-local.service'],{cwd:__dirname})
     }catch (e) {
         console.error(e)
         process.exit(4)
