@@ -5,16 +5,17 @@ function exec(cmd,args,options){
     if(!args){
         args=[]
     }
-    const shell=spawn(cmd,args,options)
-    shell.stdout.on('data', (data) => {
+    const cp=spawn(cmd,args,options)
+    cp.stdout.on('data', (data) => {
         console.log(data.toString())
     })
-    shell.stderr.on('data', (data) => {
+    cp.stderr.on('data', (data) => {
         console.error(data.toString())
     })
-    shell.on('close', (code) => {
+    cp.on('close', (code) => {
         console.log(`子进程退出，退出码 ${code}`)
     })
+    return cp
 }
 
 function execSync(cmd,args,options){
@@ -29,19 +30,19 @@ function execPromsify(cmd,args,options,ignoreErr=false){
         if(!args){
             args=[]
         }
-        const shell=spawn(cmd,args,options)
-        shell.stdout.on('data', (data) => {
+        const cp=spawn(cmd,args,options)
+        cp.stdout.on('data', (data) => {
             console.log(data.toString())
         })
-        shell.stderr.on('data', (data) => {
+        cp.stderr.on('data', (data) => {
             console.error(data.toString())
             if(ignoreErr){
-                reject()
+                reject(data)
             }
         })
-        shell.on('close', (code) => {
+        cp.on('close', (code) => {
             console.log(`子进程退出，退出码 ${code}`)
-            resolve()
+            resolve(cp)
         })
     })
 }
@@ -57,14 +58,14 @@ function execBackgrand(cmd,args,options){
     args.push('&')
     cmd='nohup'
     options.detached=true
-    const shell=spawn(cmd,args,options)
-    shell.stdout.on('data', (data) => {
+    const cp=spawn(cmd,args,options)
+    cp.stdout.on('data', (data) => {
         console.log(data.toString())
     })
-    shell.stderr.on('data', (data) => {
+    cp.stderr.on('data', (data) => {
         console.error(data.toString())
     })
-    shell.on('close', (code) => {
+    cp.on('close', (code) => {
         console.log(`子进程退出，退出码 ${code}`)
     })
 }
