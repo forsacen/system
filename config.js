@@ -26,6 +26,10 @@ module.exports={
             url:'https://repo.mongodb.org/apt/debian/dists/stretch/mongodb-org/4.2/main/binary-amd64/mongodb-org-server_4.2.8_amd64.deb',
             bindIp:'0.0.0.0',
             port:'27017',
+            auth:{
+                user:'admin',
+                password:'333221abc',
+            }
         }
     },
     //开机启动
